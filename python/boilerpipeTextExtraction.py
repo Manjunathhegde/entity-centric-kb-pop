@@ -24,11 +24,10 @@ import mongodbClass as mdb
 #read Keys
 ##
 keys = {}
+#get keys for google query
 execfile("config/keys.txt", keys)
 api_key = keys["api_key"]
 cx_key = keys["cx_key"]
-cmu_key = keys["cmu_key"]
-
 ##
 #read urls
 ##
@@ -92,22 +91,6 @@ def getLinks_custom_search(searchfor):
     if len(hits) == 0:
         print "No links received"
         return None
-    return hits
-
-#####
-# parse json to get the links from the response object
-#####
-def parseJson_cmu_search(jsonString):
-    hits = []
-    response = json.loads(jsonString)
-    if(response != None):
-        try:
-            resultList = response['results']
-            for res in resultList:   
-                link = res['url']
-                hits.append(link)
-        except:
-            return hits
     return hits
 
 

@@ -11,7 +11,7 @@ from nltk import word_tokenize, pos_tag
 from multiprocessing import Process, Queue
 import time
 from boilerpipe.extract import Extractor
-from boilerpipeTextExtraction import getLinks_api_search,getLinks_cmu_search, getLinks_custom_search, extractDataFromLink
+from boilerpipeTextExtraction import getLinks_api_search,getLinks_custom_search, extractDataFromLink
 
 ##
 #read Keys
@@ -99,8 +99,6 @@ def webScraping(entToSearch, queryStrings):
         linksList_api = getLinks_api_search(searchString,2)
         time.sleep(1)
         linksList_cstm = getLinks_custom_search(searchString)   #last int to control the number of links
-        print "ent to search" ,searchString
-        linksList_cmu = getLinks_cmu_search(searchString)
         
         if linksList_api != None:
             for l in linksList_api:
@@ -110,12 +108,6 @@ def webScraping(entToSearch, queryStrings):
 
         if linksList_cstm != None:		
             for l in linksList_cstm:
-                l = l.strip(' ')
-                l = l.strip('\n')
-                link_set.add(l)
-        
-        if linksList_cmu != None:		
-            for l in linksList_cmu:
                 l = l.strip(' ')
                 l = l.strip('\n')
                 link_set.add(l)

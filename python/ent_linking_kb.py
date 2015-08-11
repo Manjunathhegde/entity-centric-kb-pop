@@ -223,7 +223,7 @@ def inference_test(entSearch):
         data = vals.get('final-triples')
         if len(data) > 0 :
             getNellRelations(data,entSearch)
-            outputFileName = 'output/'+entSearch.replace(' ','_') +'.csv'
+            outputFileName = entSearch.replace(' ','_') +'.csv'
             fw = open(outputFileName, 'w')
             fileWriter = csv.writer(fw)
             fileWriter.writerows(finalList)
