@@ -1,0 +1,6 @@
+ip="localhost"
+port=27017
+database="doc-database"
+tmp_collection="tmp-collection"
+doc_collection= "doc-collection"
+triples_collection="triples-collection"
