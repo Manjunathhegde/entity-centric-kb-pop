@@ -34,7 +34,7 @@ def getRelationAndEntity(line):
 def collectEntities(primaryEnt):
     global dbObj
     dbObj = mdb.mongodbDatabase('triples_collection')
-    allExt = mdb.mongodbDatabase('all_ext_collection_new')
+    allExt = mdb.mongodbDatabase('all_ext_collection')
     allExtCol = allExt.docCollection
     extObj = allExtCol.find_one({'primaryEnt':primaryEnt})
     if extObj == None:
@@ -152,6 +152,14 @@ def collectEntities(primaryEnt):
         newVal =  {'primaryEnt':primaryEnt, 'output_set':tripleList}
         col.replace_one({'primaryEnt':primaryEnt},newVal,True)
         print "updated the triple list", primaryEnt
+        
+    orig_stdout = sys.stdout
+    outfile = open('tripleList.txt','w')
+    sys.stdout = outfile
+    for t in tripleList:
+        print t
+    outfile.close()
+        
     allExt.client.close()
     dbObj.client.close()
    

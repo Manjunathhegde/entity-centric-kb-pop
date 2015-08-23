@@ -103,7 +103,7 @@ def getRelationAndEntity(line):
     
 def printToFile(sentenceToExtractionMap,sentencewiseCorefResultDict,xmlFN):
     global allExt
-    allExt = mdb.mongodbDatabase('all_ext_collection_new')
+    allExt = mdb.mongodbDatabase('all_ext_collection')
     allExtCol = allExt.docCollection
     
     extObj = allExtCol.find_one({'primaryEnt':primaryEnt})

@@ -202,7 +202,6 @@ def extractDataFromLink(queue, urls, filename, fileCount):
             oldVal = docs.find_one({'url':urls,'primaryEnt':filename})
             sentenceList = oldVal['documents']
             sentenceString = ' '.join(sentenceList)
-            
             getTripleList(sentenceString,urls,filename)# call a function to do corenlp->sentcreate->ollie	
         except:
             pass

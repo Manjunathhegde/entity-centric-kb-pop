@@ -161,7 +161,6 @@ def generateTriples(sentenceList):
     global dbObj
     openieDir="openieOutputFolder";
     openIEService4 = config["openie4"]
-    openIEService5 = config["openie5"]
     if randint(0,1) == 1:
         openIEService = openIEService4
     else:
@@ -176,24 +175,21 @@ def generateTriples(sentenceList):
     request = urllib2.Request(openIEService, data=data,  headers={'Content-type': 'text/plain'})
     print "connecting ",openIEService
     try:
-        connection = opener.open(request,timeout=200)
+        connection = opener.open(request,timeout=150)
         if connection.code == 200:
             data = connection.read()
             openiedata = json.loads(data)
-            
             openiedata = openiedata["openieOutput"]
-            
             openieOutputList = openiedata.split('--end of sentence--')
-            #print openieOutputList
             col = dbObj.docCollection
             oldVal = col.find_one({'url':currentUrl})
             corefdata = oldVal['corenlp']
-            
+            print "openie done for", currentUrl 
             tmp_doc = {'url':currentUrl, 'primaryEnt':primaryEnt, 'openie':openieOutputList,'corenlp':corefdata}
             
             col.replace_one({'url':currentUrl},tmp_doc,True)
             connection.close()
-            print "openie done for", currentUrl
+           
     except urllib2.HTTPError,e:
         connection = e
         print "openie error", e.read()
@@ -271,7 +267,6 @@ def getTripleList(sentenceList,url,priEnt):
             tmpobj = col.find_one({'url':url,'primaryEnt':priEnt})
             corefdata = tmpobj.get('corenlp')
             SentenceConstructionFromXML(corefdata)
-            print "done openie"
     dbObj.client.close()
 
 ##datal = open('abc.txt','r').readlines()
