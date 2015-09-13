@@ -154,8 +154,8 @@ def Main(filename):
 	for ent in entList:
 		ReplaceCorefPointers(ent)
 		collectEntities(ent)
-#		entityClusterAndNormalise(ent)
-#		inference_test(ent)
+		entityClusterAndNormalise(ent)
+		inference_test(ent)
 
 #inputfile = raw_input('file name: ')
 #Main(inputfile)
