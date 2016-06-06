@@ -1,0 +1,39 @@
+\section{Related Work}
+\label{sec:related}
+
+Open Information Extraction (OIE) systems \cite{textrunner,reverb,ollie} aim at extracting textual triples of the form noun phrase-predicate-noun phrase. While such systems aim for extraction coverage, and because  they operate in an ontology-free setting, they don't directly address the problem of improving knowledge density in ontological KGs such as NELL. 
+However, OIE extractions provide a suitable starting point which is exploited by \system{}. \cite{canopy} addresses the problem of normalizing (or canonicalizing) OIE extractions which can be considered as one of the components of \system{} (see \refsec{sec:normalization}). 
+\\As a final step of \system{} we map the relation to a nell-relation. There has been many efforts in all three learning paradigms (supervised, semi-supervised and unsupervised) 
+for Relation Extraction prior to Distant Supervision. In supervised setting, sentences with labelled entities and relations are used to learn relation extractors in supervised setting.
+Work by \cite{zhou122007tree} use supervised datasets to learn classifiers to label the relations mention between a given pair of entities in a test sentence, optionally combining relation mentions.
+Supervised learner suffer from problems like expensive labelled data, corpus based relation labels and classifiers tuned for given text corpus.
+
+Other extreme for Relation Extraction is to use completely un-supervised techniques. In this approach, string of words between two entities taken from a large number of unlabelled 
+sentences is clustered. Each cluster then signifies a relation-strings. Mapping of relation clusters to knowledge base specific relation is an added overhead in un-supervised approach.
+In semi-supervised learning, a very small number of seed instances or patterns are used to do bootstrap learning. \cite{rozenfeld2008self}
+Original seed set is used to extract relations patterns, which further generate more instances. New instances are again used to generate relation patterns,
+this continues in iterative fashion. This approach suffers from low precision and semantic drift.
+
+As previously mentioned, recent proposals for improving density of KGs such as those reported in \cite{gardner2013improving,gardner2014incorporating} focus on extracting facts of one of the four extraction classes mentioned in \reftbl{tbl:extraction_taxonomy}, viz., KR-KE. The KBP challenge \cite{surdeanu2013overview}  also focuses on extracting facts while keeping the relation set fixed, i.e., it addresses the KR-KE and KR-NE extraction classes.
+
+A method to improve knowledge density in KGs by using search engine query logs and a question answering system is presented in \cite{west2014knowledge}. The proprietary nature of datasets and tools used in this approach limits its applicability in our setting.
+
+\system{} aims to improve knowledge density by extracting facts from all four extraction classes, i.e., for a given entity, it extracts facts involving known relations, identifies potentially new relations that might be relevant for this entity, establishes such relations between the given entity and other known as well as new entities -- all in a single system. While various parts of this problem have been studied in isolation in the past, \system{} is the first system to the best of our knowledge that addresses the complete problem as a single framework.
+
+
+
+%To best of our knowledge, no specific paper has discussed populating knowledge bases with entity centric approach. 
+%The below subsections discusses the relative works that has been done in information extraction and clustering which are used in our system.
+%
+%\subsection{Information Extraction}
+%\label{sec:inormationextraction}
+%Lot of work has been done in creating  knowledge bases and processing the web corpus to represent them in the more  informative way. 
+%The \textit{subject verb object} triple extraction problem has been deeply studied and many approaches have been proposed. 
+%TextRunner \cite{textrunner} has used Naive Bayer’s classifier and CRF models to identify the noun phrases and the relations in the sentence. 
+%Reverb \cite{reverb} approach has followed light verb based model along with the rule based mechanism to define the relation in the sentence and in turn to find the noun phrases. 
+%Ollie \cite{ollie} has more general approach to consider noun phrases along with verbs in the relation. 
+%OpenIE V4 \cite{openie4} has used the statistical relational learning methods to extract relations.
+
+%\subsection{Clustering Entities and Relations}
+%\label{clusterentrel}
+%\cite{canopy} summarizes different methods used in clustering the relations and entities. Most of the work in this area mainly talks about defining the similarity between words or phrases.

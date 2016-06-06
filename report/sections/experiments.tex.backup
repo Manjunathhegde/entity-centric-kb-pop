@@ -1,0 +1,62 @@
+\section{Experiments}
+\label{sec:expts}
+
+In order to evaluate effectiveness of \system{}, we apply it to increase knowledge density for 100 randomly selected entities each from five 
+NELL categories: \textit{Scientist, Universities, Books, Birds}, and \textit{Cars}. For each category, a random subset of extractions in that category was evaluated using Mechanical Turk. 
+{\color{blue} To get a better accuracy of the evaluation, each fact was evaluated by 3 turkers (workers). Workers were made to classify each fact as correct, incorrect or can't say. 
+Only those facts classified as correct by 2 or more evaluators were taken as a correct facts.}
+Experimental results comparing knowledge densities in NELL and after application of \system{}, along with the accuracy of extractions, are presented in \reftbl{tbl:main_result}. 
+From this, we observe that \system{} is able to improve knowledge density in NELL by a factor of 7.7 while maintaining 75.5\% accuracy.
+
+Sample extraction examples and accuracy per-extraction class are presented in \reftbl{table:mapping} and \reftbl{table:precision}, respectively.
+
+{\color{blue} It is interesting to see the type of clusters formed and reason for those cluster formation. 
+For example in the below cluster, \\
+\textit{ \{ (J. Willard Milnor, was awarded, 2011 Abel Prize); (John Milnor, received, the Abel Prize) \}}\\
+The system has able to cluster facts which have different wordings in relation and entity phrases. In entity matching step, cases where one noun phrase is a substring of other, as in\textit{Abel Prize} and \textit{2011 Abel Prize} are put together.
+This works well in most of the cases but formation of clusters like \textit{1.\{(Indian), (Indian Institute of Science)\}} or \textit{2. \{(America and China),(America)\}} may not be a correct ones.
+
+Consider the example below, \\
+1.\textit{(Georg Waldemar Cantor, died on, January 6) \\
+2.(Georg Cantor,died on, January 1918)\\
+}
+In this case, fact 1 and 2 were placed in different clusters since number part of the noun phrase doesn't match exactly. The canopy method with word level similarity matching may not be suitable for numbers and dates.
+} 
+
+Based on evaluation over a random-sampling, we find that entity linking in \system{} is 92\% accurate, while relation linking is about 70\% accurate.
+
+{\color{blue}  In entity linking stage titles and adjective were removed for matching. In the following example \\
+\textit{(Georg Waldemar Cantor, was born in (AtDate), 1854)\\}
+noun phrase \textit{Georg Waldemar Cantor} was mapped to category \textit{person} using his last name and \textit{1854} to category \textit{date}. The \textit{was born in} maps to many predicates in NELL relational metadata.
+Predicate \textbf{AtDate} was selected based on the rule that type signature of the predicate matches the type of the noun phrases present in the fact. It also has the highest frequency count for the relational phrase in the metadata.
+In the example below,\\
+\textit{(Christiaan Eijkman, married (SpecializationOf), Aaltje Wigeri Edema)}\\
+\textit{married} has been mapped to \textit{SpecializationOf} because of error in finding the type for \textit{Aaltje Wigeri Edema}
+Relation mapping has lesser accuracy due to 2 reasons. 1. Error in getting type (category) of an entity and 2. Error in selecting a predicate when relation phrase matches many predicates in the metadata.
+}
+
+
+%For our experiments, NELL knowledge base is chosen for comparison and mapping. Entities for the experiments are selected from NELL. 5 categories are chosen so as to test the working of 
+%the system on different  kinds of entities. Subset of nearly 100 entities are randomly selected from NELL's collection. 
+%The set of operations discussed in the previous section are performed on the selected entities. The number of queries made to get the entity related links was limited by query quota. Less than 20 documents per entity were selected for further processing. Few examples of the fact extracted are given in the table.  
+
+%Only those extractions having the mention of primary entity are retained in the final result set. These extractions are evaluated through mechanical turk and majority of the answer is considered to assign label. These facts are again evaluated to ensure that labels are correct. 
+%The  results from the evaluation and summary of all the facts for different categories are given in the table \ref{table:precision}.
+
+%One more important outcome of these experiments was the category specific relations. After looking at all the extractions of a particular category, we were able to extract relational phrases which were
+%highly related to category under observation. Only those phrases which occures with high frequency were selected and tabulated below. Due to space constraints only few relations for only 2 categories are shown
+
+%The mapping of the extraction to an existing knowledge base was a way to classify the extractions. The classification of the facts were done based on the novelty of the relation and entity as
+%discussed in the introduction section. 
+%Table \ref{table:mapping} gives few sample outputs of facts that were mapped to NELL. 
+
+
+%The initial goal of this work was to reduce the sparsity of the knowledge bases by actively populating the facts at entity level. The extractions are classified based on their novelty and correctness of the 
+%facts in each class is studied. It is also important to maintain the quality of the facts while expanding the knowledge graph. In our work we see that on an average the increase in the facts are x times 
+%with a y \% precision. Table \ref{table:precision} summarizes precision and recall of the facts extracted.
+%
+%
+%
+%Table \ref{table:recall} summarizes the average number of facts per entity before and after running our extractor system.
+
+

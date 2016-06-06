@@ -1,0 +1,82 @@
+
+
+\begin{table*}[!htb]
+\begin{small}
+\begin{center}
+\begin{tabular}{|p{2cm}|p{2cm}|p{2.5cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+\hline
+%\textbf{Category} & \textbf{Avg.No. of facts/entity in NELL} & \textbf{Avg.No. of facts/entity extracted} & \textbf{Facts Evaluated} & \textbf{No. of Correct Facts} & \textbf{Accuracy}\\
+\textbf{Category} & \textbf{Knowledge Density in NELL} & \textbf{Knowledge Density after \system{}} & \textbf{\# Facts Evaluated} & \textbf{\# Correct Facts} & \textbf{Accuracy}\\
+\hline
+Scientist & 1.27 & 18.5 & 164 & 141 & 85.97 \\
+\hline
+Universities & 1.17 & 9 & 197 & 141 & 71.57\\
+\hline
+Books & 1.34 & 4.49 & 202 & 165 & 81.68 \\
+\hline
+Birds & 1.27 & 6.69 & 194 & 136 & 70.10 \\
+\hline
+Cars & 1.5 & 11.61 & 201 & 140 & 69.65 \\
+\hline
+\hline
+Overall & 1.3 & 10.05 & 958 & 723 & 75.46 \\
+\hline
+\end{tabular}
+\caption{\label{tbl:main_result}Knowledge densities of five categories in NELL and after application of \system{}, along with resulting accuracy. We observe that overall, \system{} is able to increase knowledge density by a factor of 7.7 at 75.5\% accuracy. This is our main result.}
+\end{center}
+%\end{table*}
+%
+%\begin{table*}[th]
+%\begin{small}
+\begin{tabular}{|p{2.3cm}|p{4.6cm}|p{5.5cm}|p{2cm}|}
+%\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Entity Name} & \textbf{All facts in NELL} & \textbf{Sample facts extracted by \system{}} & \textbf{Extraction Class} \\
+\hline
+%Seth Carlo Chandler & Seth Carlo Chandler can be found on Wikipedia at http://en.wikipedia.org/wiki/ Seth\%20Carlo\%20Chandler & Seth Carlo Chandler became associated with Benjamin Pierce & NR-KE\\ 
+%\\
+%{} & {} & Chandler used Almucantar & KR-KE \\
+%\\
+%{} & {} & Seth Carlo Chandler lived on Craigie street & KR-NE \\
+%\hline
+\textit{George Paget Thomson} & \textit{(George Paget Thomson, isInstanceOf, scientist)} & \textit{(Sir George Thomson, isFellowOf, Royal Society)} & NR-KE \\
+%{} & {} & (George Thomson, married, Kathleen Buchanan Smith) & KR-NE \\
+{} & {} & \textit{(George Thomson, hasSpouse, Kathleen Buchanan Smith)} & KR-NE \\
+{} & {} & \textit{(George Paget Thomson, diedOn,  September 10)} & KR-KE\\
+%\hline
+%Joseph Engelberger & Joseph Engelberger is a scientist %Joseph Engelberger can be found on Wikipedia at http://en.wikipedia.org/wiki/ Joseph\%20Engelberger 
+%	& Joseph Engelberger founded HelpMate Robotics Inc & KR-NE\\
+%{} &  & Joseph Engelberger born in New York City & KR-KE\\
+%{} & {} & Unimate actually predated Engelberger & NR-NE \\
+\hline
+\end{tabular}
+\caption{\label{table:mapping}Facts corresponding to an entity from the \textit{scientists} domain in NELL as well as those extracted by \system{}. While NELL contained only one fact for this entity, \system{} was able to extract 15 facts for this entity, only 3 of which are shown above.}
+%\vspace{0.2cm}
+%\end{small}
+%\end{table*}
+%
+%\begin{table*}[th]
+%\begin{small}
+\begin{tabular}{|p{1.5cm}|p{0.8cm}|p{0.8cm}|p{0.65cm}|p{0.8cm}|p{0.8cm}|p{0.65cm}|p{0.8cm}|p{0.8cm}|p{0.65cm}|p{0.8cm}|p{0.8cm}|p{0.65cm}|}
+\hline
+\textbf{Category} & \multicolumn{3}{c|}{\textbf{KR - KE}} & \multicolumn{3}{c|}{\textbf{KR - NE}}  & \multicolumn{3}{c|}{\textbf{NR - KE}} & \multicolumn{3}{c|}{\textbf{NR - NE}} \\
+\hline
+ {} & correct facts & wrong facts  & acc. & correct facts & wrong facts & acc. & correct facts & wrong facts & acc. & correct facts & wrong facts & acc.\\
+\hline
+Scientists & 57 & 10 & 85.07 & 61& 8 & 88.40 & 14 & 3 & 82.35 & 9 & 2 & 81.81 \\
+\hline
+Cars & 68 & 35 & 66.01 & 58 & 21 & 73.41 & 9 & 5 & 64.28 & 5 & 0 & 100 \\
+\hline
+Universities & 52 & 30 & 63.41 & 68 & 20 & 77.27 & 9 & 2 & 81.81 & 12 & 4 & 75 \\
+\hline
+Books & 78 & 24 & 76.47 & 79 & 12 & 86.81 & 2 & 0 & 100 & 6  & 1  & 85.71 \\
+\hline
+Birds & 67 & 29 & 69.79 & 46 & 19 & 70.76 & 15 & 4 & 78.94 & 8 & 6 & 57.14 \\
+\hline
+\hline
+Overall & 322	 & 128 & 71.55 & 312 & 80 & 79.59 & 49 & 14 & 77.77 & 40 & 13 & 75.47 \\
+\hline
+\end{tabular}
+\caption{\label{table:precision}Accuracy breakdown over \system{} extractions for each of the four extraction classes in \reftbl{tbl:extraction_taxonomy}. For each category, approximately 200 extractions were evaluated using Mechanical Turk.}
+\end{small}
+\end{table*}

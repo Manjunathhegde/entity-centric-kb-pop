@@ -1,0 +1,66 @@
+\section{Experiments}
+\label{sec:expts}
+
+In order to evaluate effectiveness of \system{}, we apply it to increase knowledge density for 100 randomly selected entities from each of the following five NELL categories: \textit{Scientist, Universities, Books, Birds}, and \textit{Cars}. For each category, a random subset of extractions in that category was evaluated using Mechanical Turk. To get a better accuracy of the evaluation, each fact was evaluated by 3 workers. Workers were made to classify each fact as correct, incorrect or can't say. 
+Only those facts classified as correct by 2 or more evaluators were considered as correct facts.
+
+{\bf Main Result}: Experimental results comparing knowledge densities in NELL and after application of \system{}, along with the accuracy of extractions, are presented in \reftbl{tbl:main_result}. 
+From this, we observe that \system{} is able to improve knowledge density in NELL by a factor of 7.7 while maintaining 75.5\% accuracy.
+Sample extraction examples and accuracy per-extraction class are presented in \reftbl{table:mapping} and \reftbl{table:precision}, respectively.
+
+{\bf Noun and Relation Phrase Normalization}: We didn't perform any intrinsic evaluation of the entity and relation normalization step. However, in this section, we provide a few anecdotal examples to give a sense of the output quality from this step. We observe that the canopy clustering algorithm for entity and normalization is able to cluster together facts with somewhat different surface representations. For example, the algorithm came up with the following cluster with two facts: \textit{ \{(J. Willard Milnor, was awarded, 2011 Abel Prize); (John Milnor, received, Abel Prize)\}}. It is encouraging to see that the system is able to put \textit{J. Willard Milnor} and \textit{John Milnor} together, even though they have somewhat different surface forms (only one word overlap). Similarly, the relation phrases \textit{was awarded} and \textit{received} are also considered to be equivalent in the context of these beliefs.
+%{\color{blue} It is interesting to see the type of clusters formed and reason for those cluster formation. The detailed evaluation of the clustering and normalization stage were not done, but the overall quality of the cluster formation and performance of the system was found to be satisfactory.
+%For example in the below cluster, \\
+%\textit{ \{(J. Willard Milnor, was awarded, 2011 Abel Prize); (John Milnor, received, Abel Prize)\}}\\
+%The system has able to cluster facts which have different wordings in relation and entity phrases. In entity matching step, cases where one noun phrase is a substring of other, as in \textit{Abel Prize} and \textit{2011 Abel Prize} are put together.
+%This works well in most of the cases but formation of clusters like \textit{1.\{(Indian), (Indian Institute of Science)\}} or \textit{2. \{(America and China),(America)\}} may not be a correct ones.
+%
+%Consider the example below, \\
+%\textit{(Georg Waldemar Cantor, died on, January 6) \\
+%(Georg Cantor,died on, January 1918)\\
+%}
+%These similar facts were placed in different clusters as the number part of the noun phrases are not matching. The canopy method with word level similarity matching may not be suitable for numbers and dates.
+%} 
+
+{\bf Integrating with Knowledge Graph}: Based on evaluation over a random-sampling, we find that entity linking in \system{} is 92\% accurate, while relation linking is about 70\% accurate.
+
+In the entity linking stage, adjectives present in a noun phrase (NP) were ignored while matching the noun phrase to entities in the knowledge graph (NELL KB in this case). In case the whole NP didn't find any match, part of the NP was used to retrieve its category, if any. For example, in \textit{(Georg Waldemar Cantor, was born in, 1854)}, the NP  \textit{Georg Waldemar Cantor} was mapped to category \textit{person} using his last name and \textit{1854} to category \textit{date}. The relation phrase \textit{"was born in"} maps to many predicates in NELL relational metadata. NELL predicate \textit{AtDate} was selected based on the rule that category signature of the predicate matches the category of the noun phrases present in the triple. It also has the highest frequency count for the relational phrase in the metadata.
+
+We observed that relation mapping has lesser accuracy due to two reasons. Firstly, error in determining right categories of NPs present in a triple; and secondly, due to higher ambiguity involving relation phrases in general, i.e., a single relation phrase usually matches many relation predicates in the ontology.
+
+%{\color{blue}  In entity linking stage, titles and adjective of the noun phrases were removed while matching it to NELL. Part of the noun phrases were used to get the type in the cases were whole noun phase has no mention in NELL.
+%In the following example, \\
+%\textit{(Georg Waldemar Cantor, was born in (AtDate), 1854)\\}
+%noun phrase \textit{Georg Waldemar Cantor} was mapped to category \textit{person} using his last name and \textit{1854} to category \textit{date}. The relation phrase \textit{was born in} maps to many predicates in NELL relational metadata.
+%Predicate \textbf{AtDate} was selected based on the rule that type signature of the predicate matches the type of the noun phrases present in the fact. It also has the highest frequency count for the relational phrase in the metadata.
+%In the example below,\\
+%\textit{(Christiaan Eijkman, married (SpecializationOf), Aaltje Wigeri Edema)}\\
+%\textit{married} has been mapped to \textit{SpecializationOf} because of error in finding the type for \textit{Aaltje Wigeri Edema}
+%Relation mapping has lesser accuracy due to 2 reasons. 1. Error in getting type (category) of an entity and 2. Error in selecting a predicate when relation phrase matches many predicates in the metadata.
+%}
+
+
+%For our experiments, NELL knowledge base is chosen for comparison and mapping. Entities for the experiments are selected from NELL. 5 categories are chosen so as to test the working of 
+%the system on different  kinds of entities. Subset of nearly 100 entities are randomly selected from NELL's collection. 
+%The set of operations discussed in the previous section are performed on the selected entities. The number of queries made to get the entity related links was limited by query quota. Less than 20 documents per entity were selected for further processing. Few examples of the fact extracted are given in the table.  
+
+%Only those extractions having the mention of primary entity are retained in the final result set. These extractions are evaluated through mechanical turk and majority of the answer is considered to assign label. These facts are again evaluated to ensure that labels are correct. 
+%The  results from the evaluation and summary of all the facts for different categories are given in the table \ref{table:precision}.
+
+%One more important outcome of these experiments was the category specific relations. After looking at all the extractions of a particular category, we were able to extract relational phrases which were
+%highly related to category under observation. Only those phrases which occurs with high frequency were selected and tabulated below. Due to space constraints only few relations for only 2 categories are shown
+
+%The mapping of the extraction to an existing knowledge base was a way to classify the extractions. The classification of the facts were done based on the novelty of the relation and entity as
+%discussed in the introduction section. 
+%Table \ref{table:mapping} gives few sample outputs of facts that were mapped to NELL. 
+
+
+%The initial goal of this work was to reduce the sparsity of the knowledge bases by actively populating the facts at entity level. The extractions are classified based on their novelty and correctness of the 
+%facts in each class is studied. It is also important to maintain the quality of the facts while expanding the knowledge graph. In our work we see that on an average the increase in the facts are x times 
+%with a y \% precision. Table \ref{table:precision} summarizes precision and recall of the facts extracted.
+%
+%
+%
+%Table \ref{table:recall} summarizes the average number of facts per entity before and after running our extractor system.
+
+
